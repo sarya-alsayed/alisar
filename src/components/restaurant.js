@@ -1,10 +1,10 @@
 
 const Restaurant = (props) => {
   return (
-    <div>
-      <div onClick={() => props.handleRestaurantClick(props.restaurant)}>
+    <div className = 'sidebar'>
+      <a href = '#restaurant' onClick={() => props.handleRestaurantClick(props.restaurant)}>
         {props.restaurant.name}
-      </div>
+      </a>
     </div>
   );
 }

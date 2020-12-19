@@ -1,0 +1,94 @@
+.container {
+  display: grid;
+  grid-template-columns: 25% 75%;
+  width: 100vw;
+	height: 100vh;
+}
+.container > div {
+  padding: 1em;
+}
+.filterDiv {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  background-color: white;
+}
+
+.restaurantDash {
+  background-color: #eeeeee ;
+}
+
+.dash {
+	display: flex;
+}
+
+.dash > div {
+	padding: 10px;
+	margin: 10px;
+	justify-self: center;
+}
+
+.restaurantList { 
+  background-color:#e0e0e0;
+  height: 100%;
+}
+
+.image {
+	height: 300px ;
+	width: 300px;
+}
+
+imageBox {
+	align-content: center;
+}
+
+.restName {
+	margin: 0;
+	font-weight: bold;
+	font-size: 25px;
+	color: #424242;
+}
+
+.restLocation {
+	margin: 0;
+	font-size: 15px;
+	color: lightslategray;
+}
+
+.restInfo {
+	color: #424242;
+	margin: 0;
+}
+.info {
+	margin: 0;
+	color: #757575;
+}
+  
+.sidebar a {
+  display: block;
+  color: #424242;
+  padding: 8px;
+  text-decoration: none;
+  border-bottom: 1px solid lightgray;
+  text-align: center;
+}
+
+.sidebar a:hover {
+  background-color: #4dd0e1;
+  color: white;
+}
+  
+@media screen and (max-width: 700px) {
+	.sidebar {
+  	width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+}
+  
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}

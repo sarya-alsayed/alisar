@@ -101,10 +101,8 @@ class App extends Component {
       return <div>Loading...</div>;
     } else {
       return (
-        <div>
-          <div><RestaurantDash restaurant = {restaurantInfo} /></div>
-          <div><RestaurantsList restaurants = {restaurants}  handleRestaurantClick = {this.handleRestaurantClick.bind(this)} /></div>
-          <div>
+        <div className = 'container'>
+          <div className = 'filterDiv'>
             <form>
               <input type="checkbox" id="25" name="cuisines" value="Chinese" onChange={this.handleInputChange} />
               <label>Chinese</label><br/>
@@ -123,6 +121,8 @@ class App extends Component {
               <button onClick={(e) => this.filterRestaurantsByCuisines(e)}>filter</button>
             </form>
           </div>
+          <div className = 'restaurantList'><RestaurantsList restaurants = {restaurants}  handleRestaurantClick = {this.handleRestaurantClick.bind(this)} /></div>
+          <div className = 'restaurantDash'><RestaurantDash restaurant = {restaurantInfo} /></div>
         </div>
       );
     }
