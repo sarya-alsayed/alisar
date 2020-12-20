@@ -30,17 +30,22 @@ class App extends Component {
     }    
   }
 
-  filterRestaurantsByCuisines(e) {
+  filterRestaurants(e) {
     e.preventDefault();
     console.log(this.state.filterAttributes)
     const attributes = this.state.filterAttributes;
-    var query = "";
+    var queryCuisine = "";
+    var queryCategory = "";
     for (const key in attributes){
-      query = key + '%2C' + query;
+      if (attributes[key] == 'cuisine') {
+        queryCuisine = key + '%2C' + queryCuisine;
+      } else {
+        queryCategory = key + '%2C' + queryCategory;
+      }
     }
-    query = query.substring(0, query.length-3)
-    console.log(query)
-    const apiUrl2 = `https://developers.zomato.com/api/v2.1/search?city_id=297&cuisines=${query}`;
+    queryCuisine = queryCuisine.substring(0, queryCuisine.length-3);
+    queryCategory = queryCategory.substring(0, queryCategory.length-3)
+    const apiUrl2 = `https://developers.zomato.com/api/v2.1/search?city_id=297&cuisines=${queryCuisine}&category=${queryCategory}`;
     const headers = { 
       'Content-Type': 'application/json',
       'user-key': '621df21dc5fe4ac84e874b3ddaf3536e'
@@ -102,28 +107,41 @@ class App extends Component {
     } else {
       return (
         <div className = 'container'>
+          Restaurants In Adelaide Australia
           <div className = 'filterDiv'>
-            <label id = 'cui'>cuisines</label>
             <form className = 'cuisines'>
               <div>
-              <input type="checkbox" id="25" name="cuisines" value="Chinese" onChange={this.handleInputChange} />
-              <label className='cui'>Chinese</label><br/>
-              <input type="checkbox" id="161" name="cuisines" value="Coffee and Tea" onChange={this.handleInputChange} />
-              <label className='cui'>Coffee and Tea</label><br/>
-              <input type="checkbox" id="1" name="cuisines" value="American" onChange={this.handleInputChange} />
-              <label className='cui'>American</label><br/>
-              <input type="checkbox" id="4" name="cuisines" value="Arabian" onChange={this.handleInputChange} />
-              <label className='cui'>Arabian</label><br/>
+              <label className = 'cuiLabel'>CATEGORY</label><br/>
+                <input type="checkbox" id="1" name="cuisines" value="category" onChange={this.handleInputChange} />
+                <label className='cui'>Delivery</label><br/>
+                <input type="checkbox" id="2" name="cuisines" value="category" onChange={this.handleInputChange} />
+                <label className='cui'>Dine-out</label><br/>
+                <input type="checkbox" id="3" name="cuisines" value="category" onChange={this.handleInputChange} />
+                <label className='cui'>Nightlife</label><br/>
+                <input type="checkbox" id="4" name="cuisines" value="category" onChange={this.handleInputChange} />
+                <label className='cui'>Catching-up</label><br/>
               </div>
               <div>
-              <input type="checkbox" id="1039" name="cuisines" value="Cafe Food" onChange={this.handleInputChange} />
-              <label className='cui'>Cafe Food</label><br/>
-              <input type="checkbox" id="40" name="cuisines" value="Fast Food" onChange={this.handleInputChange} />
-              <label className='cui'>Fast Food</label><br/>
-              <input type="checkbox" id='3' name='cuisines' value='Asian'  onChange={this.handleInputChange}/>
-              <label className='cui'> Asian</label><br/><br/>
+                <label className = 'cuiLabel'>CUISINE</label><br/>
+                <input type="checkbox" id="25" name="cuisines" value="cuisine" onChange={this.handleInputChange} />
+                <label className='cui'>Chinese</label><br/>
+                <input type="checkbox" id="161" name="cuisines" value="cuisine" onChange={this.handleInputChange} />
+                <label className='cui'>Coffee and Tea</label><br/>
+                <input type="checkbox" id="401" name="cuisines" value="cuisine" onChange={this.handleInputChange} />
+                <label className='cui'>Asian Fusion</label><br/>
+                <input type="checkbox" id="131" name="cuisines" value="cuisine" onChange={this.handleInputChange} />
+                <label className='cui'>Australian</label><br/>
               </div>
-              <button onClick={(e) => this.filterRestaurantsByCuisines(e)}>filter</button>
+              <div>
+                <br/>
+                <input type="checkbox" id="1039" name="cuisines" value="cuisine" onChange={this.handleInputChange} />
+                <label className='cui'>Cafe Food</label><br/>
+                <input type="checkbox" id="40" name="cuisines" value="cuisine" onChange={this.handleInputChange} />
+                <label className='cui'>Fast Food</label><br/>
+                <input type="checkbox" id='5' name="cuisines" value="cuisine" onChange={this.handleInputChange}/>
+                <label className='cui'>Bakery</label><br/><br/>
+              </div>
+              <button onClick={(e) => this.filterRestaurants(e)}>filter</button>
             </form>
           </div>
           <div className = 'restaurantList'><RestaurantsList restaurants = {restaurants}  handleRestaurantClick = {this.handleRestaurantClick.bind(this)} /></div>
