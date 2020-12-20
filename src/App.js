@@ -103,21 +103,26 @@ class App extends Component {
       return (
         <div className = 'container'>
           <div className = 'filterDiv'>
-            <form>
+            <label id = 'cui'>cuisines</label>
+            <form className = 'cuisines'>
+              <div>
               <input type="checkbox" id="25" name="cuisines" value="Chinese" onChange={this.handleInputChange} />
-              <label>Chinese</label><br/>
+              <label className='cui'>Chinese</label><br/>
               <input type="checkbox" id="161" name="cuisines" value="Coffee and Tea" onChange={this.handleInputChange} />
-              <label>Coffee and Tea</label><br/>
+              <label className='cui'>Coffee and Tea</label><br/>
               <input type="checkbox" id="1" name="cuisines" value="American" onChange={this.handleInputChange} />
-              <label>American</label><br/>
+              <label className='cui'>American</label><br/>
               <input type="checkbox" id="4" name="cuisines" value="Arabian" onChange={this.handleInputChange} />
-              <label>Arabian</label><br/>
+              <label className='cui'>Arabian</label><br/>
+              </div>
+              <div>
               <input type="checkbox" id="1039" name="cuisines" value="Cafe Food" onChange={this.handleInputChange} />
-              <label>Cafe Food</label><br/>
+              <label className='cui'>Cafe Food</label><br/>
               <input type="checkbox" id="40" name="cuisines" value="Fast Food" onChange={this.handleInputChange} />
-              <label>Fast Food</label><br/>
+              <label className='cui'>Fast Food</label><br/>
               <input type="checkbox" id='3' name='cuisines' value='Asian'  onChange={this.handleInputChange}/>
-              <label> Asian</label><br/><br/>
+              <label className='cui'> Asian</label><br/><br/>
+              </div>
               <button onClick={(e) => this.filterRestaurantsByCuisines(e)}>filter</button>
             </form>
           </div>
