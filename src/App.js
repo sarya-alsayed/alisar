@@ -11,7 +11,9 @@ class App extends Component {
       isLoaded: false,
       restaurants: [],
       restaurantInfo: null,
-      filterAttributes: {}
+      filterAttributes: {},
+      cuisinesAttributes: [],
+      sideBarList: []
     };
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -26,17 +28,44 @@ class App extends Component {
     return mergedArray;
   }
 
+  includesIn(string, array) {
+    var result = [];
+    for (var i = 0; i < array.length; i++) {
+      if (string.includes(array[i])){
+        result.push (array[i])
+      }
+    }
+    return result;
+  }
+
+  removeElementFromArray(array, element) {
+    for(var i = 0; i < array.length; i++) { 
+      if (array[i] == element) { 
+        array.splice(i, 1); 
+      }
+    }
+    return array
+  }
+
   handleRestaurantClick(restaurant) {
     this.setState({
       restaurantInfo: restaurant
     });
   }
 
+  // handleInputChange(event) {
+  //   if(event.target.checked){
+  //     this.state.filterAttributes[event.target.id] = event.target.value; 
+  //   }else{
+  //     delete this.state.filterAttributes[event.target.id];
+  //   }    
+  // }
+
   handleInputChange(event) {
     if(event.target.checked){
-      this.state.filterAttributes[event.target.id] = event.target.value; 
+      this.state.cuisinesAttributes.push(event.target.value); 
     }else{
-      delete this.state.filterAttributes[event.target.id];
+      this.state.cuisinesAttributes = this.removeElementFromArray(this.state.cuisinesAttributes, event.target.value);
     }    
   }
 
@@ -116,11 +145,47 @@ class App extends Component {
     localStorage.setItem('myData',JSON.stringify(allRestaurants));
   }
 
+  filterRestaurantsByCuisines(e) {
+    e.preventDefault();
+    console.log(this.state.cuisinesAttributes)
+    var filterResult = [];
+    var list = this.state.sideBarList;
+    var b;
+    for (var i = 0; i < this.state.cuisinesAttributes.length; i++) {
+      for (var j = 0; j < list.length; j++ ) {
+        b = list[j].restaurant.cuisines.includes(this.state.cuisinesAttributes[i]);
+        if (b) {
+          for ( var x = 0; x < filterResult.length; x++) {
+            if (list[j].restaurant.id == filterResult[x].restaurant.id) {
+              break;
+            }
+          }  
+          if ( x === filterResult.length) {
+            filterResult.push(list[j]);
+          }     
+        }
+      }
+    }
+    if (this.state.cuisinesAttributes.length === 0) {
+      this.setState({
+        isLoaded: true,
+        restaurants: this.state.sideBarList
+      })
+    } else {
+      this.setState({
+        isLoaded: true,
+        restaurants: filterResult 
+      })
+    } 
+  }
+
   componentDidMount() {
     this.getAllRestaurants();
     var myList = localStorage.getItem('myData')
     myList = JSON.parse(myList);
     myList = this.mergeArrays(myList);
+    this.state.sideBarList = myList;
+    console.log(myList)
     this.setState({
       isLoaded: true,
       restaurants: myList
@@ -139,7 +204,7 @@ class App extends Component {
           Restaurants In Adelaide Australia
           <div className = 'filterDiv'>
             <form className = 'cuisines'>
-              <div>
+              {/* <div>
               <label className = 'cuiLabel'>CATEGORY</label><br/>
                 <input type="checkbox" id="1" name="cuisines" value="category" onChange={this.handleInputChange} />
                 <label className='cui'>Delivery</label><br/>
@@ -149,28 +214,39 @@ class App extends Component {
                 <label className='cui'>Nightlife</label><br/>
                 <input type="checkbox" id="4" name="cuisines" value="category" onChange={this.handleInputChange} />
                 <label className='cui'>Catching-up</label><br/>
-              </div>
+              </div> */}
               <div>
                 <label className = 'cuiLabel'>CUISINE</label><br/>
-                <input type="checkbox" id="25" name="cuisines" value="cuisine" onChange={this.handleInputChange} />
+                <input type="checkbox" id="25" name="cuisines" value="Chinese" onChange={this.handleInputChange} />
                 <label className='cui'>Chinese</label><br/>
-                <input type="checkbox" id="161" name="cuisines" value="cuisine" onChange={this.handleInputChange} />
+                <input type="checkbox" id="161" name="cuisines" value="Coffee and Tea" onChange={this.handleInputChange} />
                 <label className='cui'>Coffee and Tea</label><br/>
-                <input type="checkbox" id="401" name="cuisines" value="cuisine" onChange={this.handleInputChange} />
+                <input type="checkbox" id="401" name="cuisines" value="Asian Fusion" onChange={this.handleInputChange} />
                 <label className='cui'>Asian Fusion</label><br/>
-                <input type="checkbox" id="131" name="cuisines" value="cuisine" onChange={this.handleInputChange} />
+                <input type="checkbox" id="131" name="cuisines" value="Australian" onChange={this.handleInputChange} />
                 <label className='cui'>Australian</label><br/>
               </div>
               <div>
                 <br/>
-                <input type="checkbox" id="1039" name="cuisines" value="cuisine" onChange={this.handleInputChange} />
+                <input type="checkbox" id="1035" name="cuisines" value="Afghan" onChange={this.handleInputChange} />
+                <label className='cui'>Afghan</label><br/>
+                <input type="checkbox" id="1" name="cuisines" value="American" onChange={this.handleInputChange} />
+                <label className='cui'>American</label><br/>
+                <input type="checkbox" id="168" name="cuisines" value="Burger" onChange={this.handleInputChange} />
+                <label className='cui'>Burger</label><br/>
+                <input type="checkbox" id="268" name="cuisines" value="Drinks Only" onChange={this.handleInputChange} />
+                <label className='cui'>Drinks Only</label><br/>
+              </div>
+              <div>
+                <br/>
+                <input type="checkbox" id="1039" name="cuisines" value="Cafe Food" onChange={this.handleInputChange} />
                 <label className='cui'>Cafe Food</label><br/>
-                <input type="checkbox" id="40" name="cuisines" value="cuisine" onChange={this.handleInputChange} />
+                <input type="checkbox" id="40" name="cuisines" value="Fast Food" onChange={this.handleInputChange} />
                 <label className='cui'>Fast Food</label><br/>
-                <input type="checkbox" id='5' name="cuisines" value="cuisine" onChange={this.handleInputChange}/>
+                <input type="checkbox" id='5' name="cuisines" value="Bakery" onChange={this.handleInputChange}/>
                 <label className='cui'>Bakery</label><br/><br/>
               </div>
-              <button onClick={(e) => this.filterRestaurants(e)}>filter</button>
+              <button onClick={(e) => this.filterRestaurantsByCuisines(e)}>filter</button>
             </form>
           </div>
           <div className = 'restaurantList'><RestaurantsList restaurants = {restaurants}  handleRestaurantClick = {this.handleRestaurantClick.bind(this)} /></div>
