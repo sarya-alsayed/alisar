@@ -11,9 +11,19 @@ class App extends Component {
       isLoaded: false,
       restaurants: [],
       restaurantInfo: null,
-      filterAttributes : {}
+      filterAttributes: {}
     };
     this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  mergeArrays(array) {
+    var mergedArray = [];
+    for (var i = 0; i < array.length; i++) {
+      for (var j = 0; j < array[i].length; j++) {
+        mergedArray.push(array[i][j]);
+      }
+    }
+    return mergedArray;
   }
 
   handleRestaurantClick(restaurant) {
@@ -70,32 +80,51 @@ class App extends Component {
       )
   }
 
-  componentDidMount() {
+  SearchRestaurantsInCity(start) {
+    var restaurantsData = [];
     const entity_id = '297';
     const city_id = '297';
-    const apiUrl = `https://developers.zomato.com/api/v2.1/search?entity_id=${entity_id}&entity_type=city&q=${city_id}&count=200`;
+    const apiUrl = `https://developers.zomato.com/api/v2.1/search?entity_id=${entity_id}&entity_type=city&city_id=${city_id}&start=${start}&count=20`;
     const headers = { 
       'Content-Type': 'application/json',
       'user-key': '621df21dc5fe4ac84e874b3ddaf3536e'
     } 
+    return new Promise(function (resolve, reject) {
     fetch(apiUrl, {method:'GET',headers})
       .then(res => res.json())
       .then(
         (result) => {
-          this.setState({
-            isLoaded: true,
-            restaurants: result.restaurants
-          });
-          console.log(result)
+          restaurantsData = result.restaurants;
+          resolve(restaurantsData);
         },
         (error) => {
-          console.log(error)
-          this.setState({
-            isLoaded: true,
-            error
-          });
+          reject(error);
         }
       )
+    }); 
+  }
+
+  async getAllRestaurants() {
+    var restaurantBunch;
+    var allRestaurants = [];
+    for (var i = 0; i < 100; i = i + 20) {
+      restaurantBunch = await this.SearchRestaurantsInCity(i);
+      if (restaurantBunch != null) {
+        allRestaurants.push(restaurantBunch);
+      }    
+    }
+    localStorage.setItem('myData',JSON.stringify(allRestaurants));
+  }
+
+  componentDidMount() {
+    this.getAllRestaurants();
+    var myList = localStorage.getItem('myData')
+    myList = JSON.parse(myList);
+    myList = this.mergeArrays(myList);
+    this.setState({
+      isLoaded: true,
+      restaurants: myList
+    })
   }
 
   render() {
