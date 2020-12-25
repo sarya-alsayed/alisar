@@ -1,6 +1,6 @@
 .container {
   display: grid;
-	grid-template-columns: 25% 75%;
+	grid-template-columns: 30% 70%;
   width: 100vw;
 	height: 100vh;
 }
@@ -31,7 +31,7 @@
 .restaurantList { 
   background-color:#e0e0e0;
 	height: 100%;
-	min-height: 3550px;
+	min-height: 1000px;
 }
 
 .image {
@@ -63,7 +63,7 @@
 
 .cuisines {
 	display: grid;
-	grid-template-columns: auto auto auto auto;
+	grid-template-columns: auto auto auto auto auto auto;
 }
 
 .cui {
@@ -73,8 +73,146 @@
 
 .cuiLabel {
 	color: #424242 ;
-	font-size: 13px;
+  font-size: 13px;
+  margin-left: -1.25rem;
 }
+
+.checkboxDiv {
+  margin-top: 8px;
+}
+
+.spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+}
+
+/*####################################################################################*/
+
+.alisar {
+  background: url('./images/rest.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 100px 0 100px 0;
+  text-shadow: 1px 0 black;
+	text-shadow: none;
+	background-position: center;
+}
+
+.alisar .logo {
+  font-size: 70px;
+  color: white;
+  height: 110px;
+  width: 110px;
+  font-family: cursive;
+  text-align: center;
+  padding-top: 33px; 
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+.alisar h1 {
+  color: whitesmoke;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 0px 0 rgb(0, 0, 0);
+}
+
+.searchBar {
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  width: 600px;
+  margin: auto;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.searchBar .city {
+  margin: 15px;
+  width: 300px;
+  height: 35px;
+  font-weight: 100;
+  padding: 6px 12px;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.searchBar .search-btn {
+  margin: 15px;
+  font-size: 15px;
+  height: 35px;
+  width: 150px;
+  font-weight: 600;
+  border-radius: 5px;
+  background-color: #17a2b8;
+  border: 1px solid #4dd0e1;
+  color: #eeeeee;
+  cursor: pointer;
+}
+
+.searchBar .search-btn:hover {
+  background-color: #757575;
+}
+
+.listBox {
+	display: flex;
+}
+
+@media (max-width: 950px) {
+  .searchBar {
+    width: 70%;
+  }
+  .searchBar .city {
+    width: 150px;
+    margin: 15px 5px 15px 10px;
+	}
+	
+  .searchBar .search-btn {
+    width: 90px;
+    margin: 15px 5px 15px 10px;
+  }
+}
+
+.cardImage {
+	width:430px;
+	margin: 30px;
+}
+
+img.homeCard1 {
+	content: url('./images/food1.jpeg');
+	height: 200px;
+}
+
+img.homeCard2 {
+	content: url('./images/food2.jpeg');
+	height: 200px;
+}
+
+
+@media (max-width: 600px) {
+  .searchBar {
+    display: block;
+  }
+  .searchBar .city, .searchBar .search-btn {
+    margin: 0;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  .searchBar div {
+    width: 90%;
+    margin: auto;
+    align-content: center;
+    padding: 10px;
+  }
+}
+
+/*####################################################################################*/
+
 .sidebar a {
   display: block;
   color: #424242;
