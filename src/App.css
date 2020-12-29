@@ -1,10 +1,10 @@
-.container {
+.mainContainer {
   display: grid;
 	grid-template-columns: 30% 70%;
   width: 100vw;
 	height: 100vh;
 }
-.container > div {
+.mainContainer > div {
   padding: 1em;
 }
 .filterDiv {
@@ -31,7 +31,7 @@
 .restaurantList { 
   background-color:#e0e0e0;
 	height: 100%;
-	min-height: 1000px;
+  min-height: 1000px;
 }
 
 .image {
@@ -219,7 +219,7 @@ img.homeCard2 {
   padding: 8px;
   text-decoration: none;
   border-bottom: 1px solid lightgray;
-  text-align: center;
+  text-align: left;
 }
 
 .sidebar a:hover {
@@ -241,4 +241,64 @@ img.homeCard2 {
     text-align: center;
     float: none;
   }
+}
+
+/*####################################################################################*/
+
+.restImage {
+  height: 450px;
+  width: 100%;
+}
+
+.overviewElem {
+  margin-left: 10px;
+  font-size: 15px;
+  /* font-weight: normal; */
+  margin-bottom: 20px;
+}
+
+.checkmark {
+  display:inline-block;
+  width: 22px;
+  height:22px;
+  -ms-transform: rotate(45deg); /* IE 9 */
+  -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+  transform: rotate(45deg);
+}
+
+.checkmark_circle {
+  position: absolute;
+  width:22px;
+  height:22px;
+  background-color: #4dd0e1;
+  border-radius:11px;
+  left:0;
+  top:0;
+}
+
+.checkmark_stem {
+  position: absolute;
+  width:3px;
+  height:9px;
+  background-color:#fff;
+  left:11px;
+  top:6px;
+}
+
+.checkmark_kick {
+  position: absolute;
+  width:3px;
+  height:3px;
+  background-color:#fff;
+  left:8px;
+  top:12px;
+}
+
+.reviews-members .media .mr-3 {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+}
+.rounded-pill {
+  border-radius: 50rem!important;
 }

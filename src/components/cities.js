@@ -5,13 +5,6 @@ let cityId;
 let cityName;
 class Cites extends Component  {
 
-	constructor(props) {
-		super(props);
-    this.state = {
-			app: false,	
-		}
-	}
-
 	handleChange(e) {
 		var sel = document.getElementById('select_id');
 		cityId = e.target.value;
@@ -24,16 +17,11 @@ class Cites extends Component  {
 			alert ( 'Please select a city');
 		}
 		else {
-			this.setState({
-				app: true
-			})
+			this.props.history.push(`/restaurants/${cityId}/${cityName}`);
 		}
 	 }
 	 
 	render () {
-		if (this.state.app) {
-			this.props.history.push(`/restaurants/${cityId}/${cityName}`);
-		}
 		return (
 			<div>
 				<div className="alisar">

@@ -81,7 +81,8 @@ class App extends Component {
     console.log(apiUrl2)
     const headers = { 
       'Content-Type': 'application/json',
-      'user-key': '228ac77f20d86fa18e10986505837b57'
+      // 'user-key': '228ac77f20d86fa18e10986505837b57'
+      'user-key': '621df21dc5fe4ac84e874b3ddaf3536e'
     } 
     return new Promise(function (resolve, reject) {
     fetch(apiUrl2, {method:'GET',headers})
@@ -150,7 +151,8 @@ class App extends Component {
     const apiUrl = `https://developers.zomato.com/api/v2.1/search?entity_id=${this.state.city_id}&entity_type=city&city_id=${this.state.city_id}&start=${start}`;
     const headers = { 
       'Content-Type': 'application/json',
-      'user-key': '228ac77f20d86fa18e10986505837b57'
+      // 'user-key': '228ac77f20d86fa18e10986505837b57'
+      'user-key': '621df21dc5fe4ac84e874b3ddaf3536e'
     } 
     return new Promise(function (resolve, reject) {
     fetch(apiUrl, {method:'GET',headers})
@@ -227,7 +229,7 @@ class App extends Component {
               </div>;
     } else {
       return (
-        <div className = 'container'>
+        <div className = 'container mainContainer'>
           <div className = 'filterDiv'>
             <form className = 'cuisines form-check'>
               <div>
