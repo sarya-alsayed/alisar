@@ -81,8 +81,7 @@ class App extends Component {
     console.log(apiUrl2)
     const headers = { 
       'Content-Type': 'application/json',
-      // 'user-key': '228ac77f20d86fa18e10986505837b57'
-      'user-key': '621df21dc5fe4ac84e874b3ddaf3536e'
+      'user-key': '228ac77f20d86fa18e10986505837b57'
     } 
     return new Promise(function (resolve, reject) {
     fetch(apiUrl2, {method:'GET',headers})
@@ -151,8 +150,7 @@ class App extends Component {
     const apiUrl = `https://developers.zomato.com/api/v2.1/search?entity_id=${this.state.city_id}&entity_type=city&city_id=${this.state.city_id}&start=${start}`;
     const headers = { 
       'Content-Type': 'application/json',
-      // 'user-key': '228ac77f20d86fa18e10986505837b57'
-      'user-key': '621df21dc5fe4ac84e874b3ddaf3536e'
+      'user-key': '228ac77f20d86fa18e10986505837b57'
     } 
     return new Promise(function (resolve, reject) {
     fetch(apiUrl, {method:'GET',headers})
@@ -197,7 +195,7 @@ class App extends Component {
   }
 
   render() {
-    const { error, isLoaded, restaurants, restaurantInfo, loading} = this.state;
+    const { error, isLoaded, restaurants, restaurantInfo, loading, city_name} = this.state;
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
@@ -231,6 +229,7 @@ class App extends Component {
       return (
         <div className = 'container mainContainer'>
           <div className = 'filterDiv'>
+            <h5>Restaurants In {city_name}</h5>
             <form className = 'cuisines form-check'>
               <div>
               <label className = 'cuiLabel'>CATEGORY</label><br/>
