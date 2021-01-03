@@ -2,21 +2,21 @@ import {withRouter} from 'react-router-dom';
 import rest from '../images/rest.jpeg';
 
 const RestaurantDash = (props) => {
-	const handleClick = (e) => {
-		e.preventDefault();
-			props.history.push({
-				pathname: `/restaurant/${props.restaurant.id}`,
-				state: {restObject: props.restaurant }
-			});
+  const handleClick = (e) => {
+    e.preventDefault();
+    props.history.push({
+      pathname: `/restaurant/${props.restaurant.id}`,
+      state: {restObject: props.restaurant }
+    });
   }
 
   return(
-		<div> {!props.restaurant ? <div>Restaurant Dashboard</div> :
-			<div>
+    <div> {!props.restaurant ? <div>Restaurant Dashboard</div> :
+      <div>
         <div className = 'dash'>
           <div className= 'imageBox'>
-            {props.restaurant.featured_image ? <img className = 'image' src={props.restaurant.featured_image}  /> :
-             <img className = 'image' src={rest}  />}
+            {props.restaurant.featured_image ? <img className = 'image' src={props.restaurant.featured_image}/> :
+            <img className = 'image' src={rest}/>}
           </div>
           <div>
             <p className = 'restName'>{props.restaurant.name}</p>
@@ -35,8 +35,8 @@ const RestaurantDash = (props) => {
         <button  className="btn btn-info  btn-lg btn-block" onClick = {(e) => handleClick(e) }>see more</button>
       </div>
       }	
-		</div>
- 	)
+    </div>
+  )
 }
 
 export default  withRouter(RestaurantDash);
