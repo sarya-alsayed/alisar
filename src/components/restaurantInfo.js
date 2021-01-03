@@ -3,6 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import Overview from './overview';
 import Reviews from './reviews';
+import rest from '../images/rest.jpeg';
 
 const RestaurantInfo = ( ) => {
   
@@ -12,7 +13,8 @@ const RestaurantInfo = ( ) => {
     <div className="container"> 
       <div className="row" >
         <div className="col" >
-          <img src= {location.state.restObject.featured_image} className="img-fluid img-thumbnail restImage" alt="Responsive" />
+          {location.state.restObject.featured_image ? <img src= {location.state.restObject.featured_image} className="img-fluid img-thumbnail restImage" alt="Responsive" /> :
+          <img src= {rest} className="img-fluid img-thumbnail restImage" alt="Responsive" />}
         </div>
       </div>
       <div className="row mt-3">

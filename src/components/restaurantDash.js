@@ -1,4 +1,5 @@
 import {withRouter} from 'react-router-dom';
+import rest from '../images/rest.jpeg';
 
 const RestaurantDash = (props) => {
 	const handleClick = (e) => {
@@ -13,7 +14,10 @@ const RestaurantDash = (props) => {
 		<div> {!props.restaurant ? <div>Restaurant Dashboard</div> :
 			<div>
         <div className = 'dash'>
-          <div className= 'imageBox'><img className = 'image' src={props.restaurant.featured_image}  /></div>
+          <div className= 'imageBox'>
+            {props.restaurant.featured_image ? <img className = 'image' src={props.restaurant.featured_image}  /> :
+             <img className = 'image' src={rest}  />}
+          </div>
           <div>
             <p className = 'restName'>{props.restaurant.name}</p>
             <p className = 'restLocation'>{props.restaurant.location.address}</p><br/>
